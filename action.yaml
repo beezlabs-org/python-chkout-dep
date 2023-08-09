@@ -1,0 +1,22 @@
+name: Python Checkout Install Dependencies
+description: Action to checkout a Python project and install dependencies
+inputs:
+  python:
+    description: Python version
+    required: false
+    default: "3.9"
+runs:
+  using: composite
+  steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+      
+    - name: Setup Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '${{ inputs.python }}'
+
+    - name: Install Dependencies
+      run: |
+        pip install -r requirements.txt
+      shell: bash
